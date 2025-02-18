@@ -15,47 +15,43 @@ const Details = () => {
   const {cartItems, deleteFromCart, TotalAmount, addToCart, removeFromCart} =
     useContext(CartContext);
 
-  const renderItem = ({item, index}) => (
-    <View style={styles.productDetailsContainer}>
+  const renderItem = ({item, index}) => {
+    return (
       <View style={styles.products}>
-        <Image
-          source={item.image}
-          style={{width: 100, height: 100, resizeMode: 'contain'}}
-        />
         <View style={styles.productDetails}>
-          <Text style={{fontSize: 17}}>{item.name}</Text>
-          <Text style={{fontSize: 17, fontWeight: 'bold'}}>
-            RS {item.price}
-          </Text>
+          <Image source={item.image} style={styles.productImage} />
 
           <View style={styles.updateCart}>
-            <TouchableNativeFeedback onPress={() => addToCart(item)}>
-              <Image
-                source={require('../assets/plus.png')}
-                style={styles.updateCartBtn}
-              />
-            </TouchableNativeFeedback>
-            <Text>{item.quantity}</Text>
-            <TouchableNativeFeedback onPress={() => removeFromCart(item)}>
-              <Image
-                source={require('../assets/minus.png')}
-                style={styles.updateCartBtn}
-              />
-            </TouchableNativeFeedback>
+            <Text style={styles.text}>{item.name}</Text>
+            <Text style={styles.text}>RS {item.price}</Text>
+            <View style={styles.updateCartBtnContainer}>
+              <TouchableNativeFeedback onPress={() => addToCart(item)}>
+                <Image
+                  source={require('../assets/plus.png')}
+                  style={styles.updateCartBtn}
+                />
+              </TouchableNativeFeedback>
+              <Text style={styles.text}>{item.quantity}</Text>
+              <TouchableNativeFeedback onPress={() => removeFromCart(item)}>
+                <Image
+                  source={require('../assets/minus.png')}
+                  style={styles.updateCartBtn}
+                />
+              </TouchableNativeFeedback>
+            </View>
           </View>
         </View>
-      </View>
 
-      <TouchableOpacity onPress={() => deleteFromCart(item)}>
-        <View>
+        <TouchableNativeFeedback onPress={() => deleteFromCart(item)}>
           <Image
             source={require('../assets/delete.png')}
-            style={styles.deleteCartBtn}
+            style={styles.updateCartBtn}
           />
-        </View>
-      </TouchableOpacity>
-    </View>
-  );
+        </TouchableNativeFeedback>
+      </View>
+    );
+  };
+
   return (
     <View style={styles.container}>
       {cartItems.length > 0 ? (
@@ -63,17 +59,9 @@ const Details = () => {
           <FlatList
             data={cartItems}
             keyExtractor={item => item.id}
+            ItemSeparatorComponent={<View style={{borderTopWidth: 1}}></View>}
             renderItem={renderItem}
           />
-          <View
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}>
-            <Text>Total: </Text>
-            <Text>{TotalAmount()}</Text>
-          </View>
         </>
       ) : (
         <Text>No Items in the cart</Text>
@@ -88,38 +76,49 @@ const styles = StyleSheet.create({
   container: {
     padding: 20,
     backgroundColor: '#ffffff',
-    // flex: 1,
+    flex: 1,
   },
-  productDetailsContainer: {
-    padding: 10,
+
+  products: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginBottom: 20,
+    padding: 10,
   },
-  products: {
-    display: 'flex',
-    flexDirection: 'row',
-    gap: 5,
+
+  productImage: {
+    height: 100,
+    width: 100,
+    resizeMode: 'contain',
   },
   productDetails: {
     display: 'flex',
-    gap: 5,
-    justifyContent: 'center',
+    flexDirection: 'row',
+    gap: 10,
+  },
+  updateCartBtnContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
     alignItems: 'center',
+    gap: 10,
+    width: '70%',
+    borderWidth: 1,
+    padding: 5,
+    borderRadius: 20,
   },
   updateCart: {
     display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
+    justifyContent: 'space-between',
   },
-  deleteCartBtn: {
+  updateCartBtn: {
     height: 20,
     width: 20,
   },
-  updateCartBtn: {
-    height: 10,
-    width: 10,
+
+  text: {
+    fontSize: 20,
   },
 });
