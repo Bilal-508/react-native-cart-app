@@ -1,4 +1,4 @@
-import {useContext, useEffect} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import {
   Alert,
   Button,
@@ -15,6 +15,8 @@ import CartContext from '../context/CartContext';
 
 const Products = ({navigation}) => {
   const {cartItems, addToCart, getTotalCartItems} = useContext(CartContext);
+
+  const [productsData, setProductsData] = useState();
 
   useEffect(() => {
     navigation.setOptions({
@@ -33,6 +35,19 @@ const Products = ({navigation}) => {
       ),
     });
   }, [navigation, cartItems]);
+
+  const fetchProducts = () => {
+    fetch('https://fakestoreapi.com/products')
+      .then(res => res.json())
+      .then(response => {
+        console.log('Products Response: ', response);
+        setProductsData(response);
+      })
+      .catch(error => console.log(error));
+  };
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
   const products = [
     {
@@ -100,25 +115,24 @@ const Products = ({navigation}) => {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.allProducts}>
-        {products.map(item => (
+        {productsData?.map(item => (
           <View style={styles.productsContainer} key={item.id}>
-            <View style={styles.productImage}>
-              <Image
-                source={item.image}
-                style={{width: 70, height: 70, resizeMode: 'contain'}}
-              />
-            </View>
-            <Text style={styles.productName}>{item.name}</Text>
-            <Text>RS {item.price}</Text>
-
             <TouchableOpacity onPress={() => addToCart(item)}>
-              <View style={styles.productImage}>
+              <View style={styles.addToCartBtn}>
                 <Image
                   source={require('../assets/plus-cart.png')}
                   style={styles.cartImage}
                 />
               </View>
             </TouchableOpacity>
+            <View style={styles.productImage}>
+              <Image
+                source={{uri: item.image}}
+                style={{width: 70, height: 70, resizeMode: 'contain'}}
+              />
+            </View>
+            <Text style={styles.productName}>{item.title}</Text>
+            <Text>RS {item.price}</Text>
           </View>
         ))}
       </ScrollView>
@@ -146,6 +160,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderColor: '#ccc',
     marginBottom: '5%',
+    display: 'flex',
   },
   productImage: {
     display: 'flex',
@@ -176,6 +191,9 @@ const styles = StyleSheet.create({
   cartText: {
     color: '#fff',
     fontSize: 10,
+  },
+  addToCartBtn: {
+    alignSelf: 'flex-end',
   },
   cartBtnContainer: {},
 });

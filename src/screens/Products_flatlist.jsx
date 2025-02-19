@@ -99,9 +99,16 @@ const Products = ({navigation}) => {
   console.log(cartItems);
 
   const renderItem = ({item}) => {
-    console.log('This is item', item);
     return (
       <View style={styles.productsContainer}>
+        <TouchableOpacity onPress={() => addToCart(item)}>
+          <View style={styles.addToCartBtn}>
+            <Image
+              source={require('../assets/plus-cart.png')}
+              style={styles.cartImage}
+            />
+          </View>
+        </TouchableOpacity>
         <View style={styles.productImage}>
           <Image
             source={item.image}
@@ -110,15 +117,6 @@ const Products = ({navigation}) => {
         </View>
         <Text style={styles.productName}>{item.name}</Text>
         <Text>RS {item.price}</Text>
-
-        <TouchableOpacity onPress={() => addToCart(item)}>
-          <View style={styles.productImage}>
-            <Image
-              source={require('../assets/plus-cart.png')}
-              style={styles.cartImage}
-            />
-          </View>
-        </TouchableOpacity>
       </View>
     );
   };
@@ -150,6 +148,7 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     marginHorizontal: 'auto',
     marginVertical: 10,
+    display: 'flex',
   },
   productImage: {
     display: 'flex',
@@ -181,5 +180,9 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 10,
   },
+  addToCartBtn: {
+    alignSelf: 'flex-end',
+  },
+
   cartBtnContainer: {},
 });

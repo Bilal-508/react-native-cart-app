@@ -20,10 +20,10 @@ const Details = () => {
     return (
       <View style={styles.products}>
         <View style={styles.productDetails}>
-          <Image source={item.image} style={styles.productImage} />
+          <Image source={{uri: item.image}} style={styles.productImage} />
 
           <View style={styles.updateCart}>
-            <Text style={[styles.text, styles.bold]}>{item.name}</Text>
+            <Text style={[styles.text, styles.bold]}>{item.title}</Text>
             <Text style={styles.text}>
               RS {(item.price * item.quantity).toLocaleString('en-pk')}
             </Text>
@@ -69,7 +69,7 @@ const Details = () => {
           <View style={styles.TotalAmountContainer}>
             <View style={styles.TotalAmount}>
               <Text style={[styles.text, styles.bold]}>Total:</Text>
-              <Text style={styles.text}>
+              <Text style={[styles.text, styles.bold]}>
                 RS {TotalAmount().toLocaleString('en-pk')}
               </Text>
             </View>
@@ -118,6 +118,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     gap: 10,
+    width: '50%',
   },
   updateCartBtnContainer: {
     display: 'flex',
@@ -129,10 +130,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 5,
     borderRadius: 20,
+    borderColor: 'lightgrey',
   },
   updateCart: {
     display: 'flex',
     justifyContent: 'space-between',
+    gap: 10,
   },
   updateCartBtn: {
     height: 20,
