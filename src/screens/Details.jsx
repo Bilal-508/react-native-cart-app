@@ -26,29 +26,29 @@ const Details = () => {
             <Text style={styles.text}>{item.name}</Text>
             <Text style={styles.text}>RS {item.price * item.quantity}</Text>
             <View style={styles.updateCartBtnContainer}>
-              <TouchableNativeFeedback onPress={() => addToCart(item)}>
+              <TouchableOpacity onPress={() => addToCart(item)}>
                 <Image
                   source={require('../assets/plus.png')}
                   style={styles.updateCartBtn}
                 />
-              </TouchableNativeFeedback>
+              </TouchableOpacity>
               <Text style={styles.text}>{item.quantity}</Text>
-              <TouchableNativeFeedback onPress={() => removeFromCart(item)}>
+              <TouchableOpacity onPress={() => removeFromCart(item)}>
                 <Image
                   source={require('../assets/minus.png')}
                   style={styles.updateCartBtn}
                 />
-              </TouchableNativeFeedback>
+              </TouchableOpacity>
             </View>
           </View>
         </View>
 
-        <TouchableNativeFeedback onPress={() => deleteFromCart(item)}>
+        <TouchableOpacity onPress={() => deleteFromCart(item)}>
           <Image
             source={require('../assets/delete.png')}
             style={styles.updateCartBtn}
           />
-        </TouchableNativeFeedback>
+        </TouchableOpacity>
       </View>
     );
   };
@@ -67,7 +67,9 @@ const Details = () => {
           <View style={styles.TotalAmountContainer}>
             <View style={styles.TotalAmount}>
               <Text style={styles.text}>Total:</Text>
-              <Text style={styles.text}>RS {TotalAmount()}</Text>
+              <Text style={styles.text}>
+                RS {TotalAmount().toLocaleString('en-pk')}
+              </Text>
             </View>
 
             <TouchableNativeFeedback

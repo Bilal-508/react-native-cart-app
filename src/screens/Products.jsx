@@ -18,7 +18,7 @@ const Products = ({navigation}) => {
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <TouchableNativeFeedback onPress={() => navigation.navigate('Details')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Details')}>
           <View style={styles.cartContainer}>
             <Image
               source={require('../assets/shopping-bag.png')}
@@ -28,7 +28,7 @@ const Products = ({navigation}) => {
               <Text style={styles.cartText}>{getTotalCartItems()}</Text>
             </View>
           </View>
-        </TouchableNativeFeedback>
+        </TouchableOpacity>
       ),
     });
   }, [navigation, cartItems]);
@@ -66,31 +66,31 @@ const Products = ({navigation}) => {
     },
     {
       id: 6,
-      name: 'Shirt 5',
+      name: 'Gaming Monitor',
       price: 500,
-      image: require('../assets/Products/product_1.jpg'),
+      image: require('../assets/Products/product_6.jpg'),
     },
     {
       id: 7,
-      name: 'Shirt 6',
+      name: 'Gold Plate',
       price: 500,
-      image: require('../assets/Products/product_1.jpg'),
+      image: require('../assets/Products/product_7.jpg'),
     },
     {
       id: 8,
-      name: 'Shirt 7',
+      name: 'Hard Drive',
       price: 500,
-      image: require('../assets/Products/product_1.jpg'),
+      image: require('../assets/Products/product_8.jpg'),
     },
     {
       id: 9,
-      name: 'Shirt 8',
+      name: 'SSD',
       price: 500,
-      image: require('../assets/Products/product_1.jpg'),
+      image: require('../assets/Products/product_9.jpg'),
     },
     {
       id: 10,
-      name: 'Shirt 9',
+      name: 'Monitor',
       price: 500,
       image: require('../assets/Products/product_1.jpg'),
     },
@@ -109,7 +109,7 @@ const Products = ({navigation}) => {
           />
         </View>
         <Text style={styles.productName}>{item.name}</Text>
-        <Text>{item.price}</Text>
+        <Text>RS {item.price}</Text>
 
         <TouchableOpacity onPress={() => addToCart(item)}>
           <View style={styles.productImage}>

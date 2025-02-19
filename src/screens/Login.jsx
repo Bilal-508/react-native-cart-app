@@ -30,7 +30,6 @@ const Login = ({navigation, route}) => {
   };
 
   useEffect(() => {
-    console.log('name state change');
     setErrorMessage(isValid() ? '' : 'Invalid name');
   }, [name]);
 
