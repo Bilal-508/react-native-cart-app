@@ -5,16 +5,9 @@
  * @format
  */
 
-import React, {useContext, useState} from 'react';
+import React from 'react';
 
-import {
-  Alert,
-  Image,
-  StyleSheet,
-  Text,
-  TouchableNativeFeedback,
-  View,
-} from 'react-native';
+import {StyleSheet} from 'react-native';
 
 import WelcomeScreen from './src/screens/WelcomeScreen';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -25,7 +18,6 @@ import Register from './src/screens/Register';
 import Details from './src/screens/Details';
 import Home from './src/screens/Home';
 import Products from './src/screens/Products';
-import CartContext from './src/context/CartContext';
 import CartContextProvider from './src/context/CartContextProvider';
 
 const Stack = createNativeStackNavigator();
@@ -51,26 +43,6 @@ function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  cartImage: {height: 30, width: 30},
-  cartContainer: {
-    position: 'relative',
-  },
-  cart: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 15,
-    width: 15,
-    backgroundColor: '#000000',
-    borderRadius: 15 / 2,
-    position: 'absolute',
-    bottom: 0,
-    right: 0,
-  },
-  cartText: {
-    color: '#fff',
-  },
-});
+const styles = StyleSheet.create({});
 
 export default App;

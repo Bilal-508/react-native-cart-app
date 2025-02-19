@@ -138,13 +138,13 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
+    justifyContent: 'space-between',
   },
   productsContainer: {
     borderWidth: 1,
     width: '45%',
     padding: 10,
     borderColor: '#ccc',
-    marginLeft: '5%',
     marginBottom: '5%',
   },
   productImage: {

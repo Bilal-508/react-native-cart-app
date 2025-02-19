@@ -23,8 +23,10 @@ const Details = () => {
           <Image source={item.image} style={styles.productImage} />
 
           <View style={styles.updateCart}>
-            <Text style={styles.text}>{item.name}</Text>
-            <Text style={styles.text}>RS {item.price * item.quantity}</Text>
+            <Text style={[styles.text, styles.bold]}>{item.name}</Text>
+            <Text style={styles.text}>
+              RS {(item.price * item.quantity).toLocaleString('en-pk')}
+            </Text>
             <View style={styles.updateCartBtnContainer}>
               <TouchableOpacity onPress={() => addToCart(item)}>
                 <Image
@@ -66,7 +68,7 @@ const Details = () => {
 
           <View style={styles.TotalAmountContainer}>
             <View style={styles.TotalAmount}>
-              <Text style={styles.text}>Total:</Text>
+              <Text style={[styles.text, styles.bold]}>Total:</Text>
               <Text style={styles.text}>
                 RS {TotalAmount().toLocaleString('en-pk')}
               </Text>
