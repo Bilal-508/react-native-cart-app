@@ -118,7 +118,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     gap: 10,
-    width: '50%',
   },
   updateCartBtnContainer: {
     display: 'flex',
@@ -136,6 +135,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'space-between',
     gap: 10,
+    width: '60%',
   },
   updateCartBtn: {
     height: 20,
@@ -147,6 +147,7 @@ const styles = StyleSheet.create({
   },
   bold: {
     fontWeight: 'bold',
+    // width: '50%',
   },
   TotalAmount: {
     display: 'flex',
@@ -174,5 +175,9 @@ const styles = StyleSheet.create({
   },
   TotalAmountContainer: {
     padding: 10,
+  },
+
+  title: {
+    width: '50%',
   },
 });

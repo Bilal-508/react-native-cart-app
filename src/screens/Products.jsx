@@ -161,6 +161,7 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     marginBottom: '5%',
     display: 'flex',
+    gap: 10,
   },
   productImage: {
     display: 'flex',
