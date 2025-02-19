@@ -44,6 +44,7 @@ function App() {
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="Products" component={Products} />
           <Stack.Screen name="Details" component={Details} />
+          <Stack.Screen name="Home" component={Home} />
         </Stack.Navigator>
       </NavigationContainer>
     </CartContextProvider>

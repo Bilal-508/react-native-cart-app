@@ -1,4 +1,5 @@
 import {
+  Alert,
   Button,
   FlatList,
   Image,
@@ -23,7 +24,7 @@ const Details = () => {
 
           <View style={styles.updateCart}>
             <Text style={styles.text}>{item.name}</Text>
-            <Text style={styles.text}>RS {item.price}</Text>
+            <Text style={styles.text}>RS {item.price * item.quantity}</Text>
             <View style={styles.updateCartBtnContainer}>
               <TouchableNativeFeedback onPress={() => addToCart(item)}>
                 <Image
@@ -59,9 +60,23 @@ const Details = () => {
           <FlatList
             data={cartItems}
             keyExtractor={item => item.id}
-            ItemSeparatorComponent={<View style={{borderTopWidth: 1}}></View>}
+            ItemSeparatorComponent={<View style={styles.itemSeparator}></View>}
             renderItem={renderItem}
           />
+
+          <View style={styles.TotalAmountContainer}>
+            <View style={styles.TotalAmount}>
+              <Text style={styles.text}>Total:</Text>
+              <Text style={styles.text}>RS {TotalAmount()}</Text>
+            </View>
+
+            <TouchableNativeFeedback
+              onPress={() => Alert.alert('Check Successfully')}>
+              <View style={styles.checkOutButton}>
+                <Text style={styles.checkOutButtonText}>Check Out</Text>
+              </View>
+            </TouchableNativeFeedback>
+          </View>
         </>
       ) : (
         <Text>No Items in the cart</Text>
@@ -78,6 +93,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     flex: 1,
   },
+
+  cartProducts: {},
 
   products: {
     display: 'flex',
@@ -119,6 +136,36 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    fontSize: 20,
+    fontSize: 15,
+  },
+  bold: {
+    fontWeight: 'bold',
+  },
+  TotalAmount: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+
+  itemSeparator: {
+    borderTopWidth: 1,
+    borderColor: 'lightgrey',
+  },
+
+  checkOutButton: {
+    backgroundColor: '#037a7a',
+    padding: 10,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5,
+    marginTop: 5,
+  },
+
+  checkOutButtonText: {
+    color: 'white',
+  },
+  TotalAmountContainer: {
+    padding: 10,
   },
 });
