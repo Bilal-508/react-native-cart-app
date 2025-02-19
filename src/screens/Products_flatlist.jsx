@@ -4,7 +4,6 @@ import {
   Button,
   FlatList,
   Image,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableNativeFeedback,
@@ -37,7 +36,7 @@ const Products = ({navigation}) => {
   const products = [
     {
       id: 1,
-      name: 'Formal ',
+      name: 'Formal',
       price: 500,
       image: require('../assets/Products/product_1.jpg'),
     },
@@ -93,35 +92,46 @@ const Products = ({navigation}) => {
       id: 10,
       name: 'Monitor',
       price: 500,
-      image: require('../assets/Products/product_10.jpg'),
+      image: require('../assets/Products/product_1.jpg'),
     },
   ];
 
-  return (
-    <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.allProducts}>
-        {products.map(item => (
-          <View style={styles.productsContainer} key={item.id}>
-            <View style={styles.productImage}>
-              <Image
-                source={item.image}
-                style={{width: 70, height: 70, resizeMode: 'contain'}}
-              />
-            </View>
-            <Text style={styles.productName}>{item.name}</Text>
-            <Text>RS {item.price}</Text>
+  console.log(cartItems);
 
-            <TouchableOpacity onPress={() => addToCart(item)}>
-              <View style={styles.productImage}>
-                <Image
-                  source={require('../assets/plus-cart.png')}
-                  style={styles.cartImage}
-                />
-              </View>
-            </TouchableOpacity>
+  const renderItem = ({item}) => {
+    console.log('This is item', item);
+    return (
+      <View style={styles.productsContainer}>
+        <View style={styles.productImage}>
+          <Image
+            source={item.image}
+            style={{width: 70, height: 70, resizeMode: 'contain'}}
+          />
+        </View>
+        <Text style={styles.productName}>{item.name}</Text>
+        <Text>RS {item.price}</Text>
+
+        <TouchableOpacity onPress={() => addToCart(item)}>
+          <View style={styles.productImage}>
+            <Image
+              source={require('../assets/plus-cart.png')}
+              style={styles.cartImage}
+            />
           </View>
-        ))}
-      </ScrollView>
+        </TouchableOpacity>
+      </View>
+    );
+  };
+  return (
+    <View style={{backgroundColor: 'white'}}>
+      <FlatList
+        data={products}
+        keyExtractor={item => item.id}
+        renderItem={renderItem}
+        contentContainerStyle={styles.container}
+        columnWrapperStyle={{gap: 10}}
+        numColumns={2}
+      />
     </View>
   );
 };
@@ -130,22 +140,16 @@ export default Products;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
-    padding: 15,
-    flex: 1,
-  },
-  allProducts: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    padding: 10,
+    gap: 5,
   },
   productsContainer: {
     borderWidth: 1,
     width: '45%',
     padding: 10,
     borderColor: '#ccc',
-    marginLeft: '5%',
-    marginBottom: '5%',
+    marginHorizontal: 'auto',
+    marginVertical: 10,
   },
   productImage: {
     display: 'flex',
