@@ -1,5 +1,6 @@
 import {useContext, useEffect, useState} from 'react';
 import {
+  ActivityIndicator,
   Alert,
   Button,
   FlatList,
@@ -114,28 +115,34 @@ const Products = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.allProducts}>
-        {productsData?.map(item => (
-          <View style={styles.productsContainer} key={item.id}>
-            <TouchableOpacity onPress={() => addToCart(item)}>
-              <View style={styles.addToCartBtn}>
+      {productsData ? (
+        <ScrollView contentContainerStyle={styles.allProducts}>
+          {productsData?.map(item => (
+            <View style={styles.productsContainer} key={item.id}>
+              <TouchableOpacity onPress={() => addToCart(item)}>
+                <View style={styles.addToCartBtn}>
+                  <Image
+                    source={require('../assets/plus-cart.png')}
+                    style={styles.cartImage}
+                  />
+                </View>
+              </TouchableOpacity>
+              <View style={styles.productImage}>
                 <Image
-                  source={require('../assets/plus-cart.png')}
-                  style={styles.cartImage}
+                  source={{uri: item.image}}
+                  style={{width: 70, height: 70, resizeMode: 'contain'}}
                 />
               </View>
-            </TouchableOpacity>
-            <View style={styles.productImage}>
-              <Image
-                source={{uri: item.image}}
-                style={{width: 70, height: 70, resizeMode: 'contain'}}
-              />
+              <Text style={styles.productName}>{item.title}</Text>
+              <Text>RS {item.price}</Text>
             </View>
-            <Text style={styles.productName}>{item.title}</Text>
-            <Text>RS {item.price}</Text>
-          </View>
-        ))}
-      </ScrollView>
+          ))}
+        </ScrollView>
+      ) : (
+        <View style={styles.loading}>
+          <ActivityIndicator size="large" />
+        </View>
+      )}
     </View>
   );
 };
@@ -197,4 +204,11 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
   },
   cartBtnContainer: {},
+
+  loading: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+  },
 });
